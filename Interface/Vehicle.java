@@ -1,2 +1,6 @@
-package Interface;public interface Vehicle {
+package Interface;
+
+public interface Vehicle {
+    public abstract void typeOfEngine();
+    int noOfTyres();
 }

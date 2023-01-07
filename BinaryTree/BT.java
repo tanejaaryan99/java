@@ -1,5 +1,8 @@
 package BinaryTree;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class BT {
     static class Node{
         int val;
@@ -17,6 +20,10 @@ public class BT {
         root.left.left = new Node(4);
         root.left.right = new Node(5);
         root.right.left = new Node(6);
+        root.right.left.left = new Node(7);
+        root.right.left.right = new Node(8);
+
+
 //        root.right.right = new Node(7);
 //        postOrder(root);
 //        System.out.println();
@@ -27,8 +34,9 @@ public class BT {
 //        System.out.println(height(root));
 //        System.out.println(depth(root));
 //        System.out.println(heightByPI(root));
-        nodeAtDisK(root,2);
-//        System.out.println(nodeAtDisK(root,2));
+//        nodeAtDisK(root,2);
+        levelOrderTraversal(root);
+
     }
 
 
@@ -89,5 +97,18 @@ public class BT {
         int rd = depth(root.right);
         return Math.max(ld,rd)+1;
 
+    }
+
+    public static void levelOrderTraversal(Node root){
+        if(root == null) return;
+
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            Node n = q.poll();
+            System.out.print(n.val + " ");
+            if(n.left != null) q.add(n.left);
+            if(n.right != null) q.add(n.right);
+        }
     }
 }

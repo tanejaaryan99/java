@@ -69,11 +69,14 @@ public class BT {
             return Math.max(heightByPI(root.left), heightByPI(root.right)+1);
     }
     public static void nodeAtDisK(Node root , int k){
-        if(k==0 && root != null){
-            System.out.print(root.val + " ");
-        }
-        if(root == null && k == 0) return;
-        if(height(root)==1) return;
+        //by PI
+        if(root == null) return;
+        if(k==0) System.out.print(root.val + " ");
+//        if(k==0 && root != null){
+//            System.out.print(root.val + " ");
+//        }
+//        if(root == null && k == 0) return;
+
 
         nodeAtDisK(root.left,k-1);
         nodeAtDisK(root.right,k-1);

@@ -1,5 +1,6 @@
 package BinaryTree;
 
+import javax.sound.midi.Soundbank;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -18,7 +19,7 @@ public class BT {
         root.left = new Node(2);
         root.right = new Node(3);
         root.left.left = new Node(4);
-        root.left.right = new Node(5);
+        root.left.right = new Node(200);
         root.right.left = new Node(6);
         root.right.left.left = new Node(7);
         root.right.left.right = new Node(8);
@@ -36,6 +37,10 @@ public class BT {
 //        System.out.println(heightByPI(root));
 //        nodeAtDisK(root,2);
         levelOrderTraversal(root);
+        System.out.println();
+        System.out.println(size(root));
+        System.out.println(sizeItratively(root));
+        System.out.println(MaxInBT(root));
 
     }
 
@@ -111,4 +116,33 @@ public class BT {
             if(n.right != null) q.add(n.right);
         }
     }
+
+    public static int size(Node root){
+        if(root == null) return 0;
+        return size(root.left)+size(root.right)+1;
+
+    }
+    public static int sizeItratively(Node root){
+        if(root == null) return 0;
+
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        int size = 0;
+        while(!q.isEmpty()){
+            Node n = q.poll();
+//            System.out.print(n.val + " ");
+            size++;
+            if(n.left != null) q.add(n.left);
+            if(n.right != null) q.add(n.right);
+        }
+
+        return size;
+    }
+
+    public static int MaxInBT(Node root){
+        if(root==null) return -999999;
+        else return Math.max(root.val,Math.max(MaxInBT(root.left),MaxInBT(root.right)));
+    }
+
+
 }

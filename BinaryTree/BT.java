@@ -4,6 +4,7 @@ import javax.sound.midi.Soundbank;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
+import java.util.Stack;
 
 
 public class BT {
@@ -50,6 +51,10 @@ public class BT {
         leftView(root);
         System.out.println();
         leftViewItrativly(root);
+        System.out.println();
+        spiralLevelOrderusing1Stack(root);
+        System.out.println();
+        spiralLevelOrderusing2Stack(root);
 
     }
 
@@ -202,6 +207,50 @@ public class BT {
 
             }
         }
+    }
+
+    public static void spiralLevelOrderusing1Stack(Node root){
+        if(root == null) return;
+        boolean lToR = true;
+        Queue<Node>q = new LinkedList<>();
+        Stack<Node>s = new Stack<>();
+        q.add(root);
+        while (!q.isEmpty()){
+            int n = q.toArray().length;
+            for(int i = 0;i<n;i++){
+                Node temp = q.poll();
+                if(lToR) System.out.print(temp.val + " ");
+                else s.add(temp);
+                if(temp.left != null) q.add(temp.left);
+                if(temp.right != null) q.add(temp.right);
+            }
+            if(lToR == false) while(!s.isEmpty()) System.out.print(s.pop().val + " ");
+            lToR = !lToR;
+        }
+    }
+
+    public static void spiralLevelOrderusing2Stack(Node root){
+        if(root == null) return;
+        Stack<Node> s1 = new Stack<>();
+        Stack<Node> s2 = new Stack<>();
+        s1.add(root);
+        while(!s1.isEmpty() || !s2.isEmpty()){
+            while(!s1.isEmpty()){
+                Node temp = s1.pop();
+                System.out.print(temp.val + " ");
+                if(temp.left != null) s2.add(temp.left);
+                if(temp.right != null) s2.add(temp.right);
+            }
+            while(!s2.isEmpty()){
+                Node temp = s2.pop();
+                System.out.print(temp.val + " ");
+                if(temp.right != null) s1.add(temp.right);
+                if(temp.left != null) s1.add(temp.left);
+            }
+
+        }
+
+
     }
 
 

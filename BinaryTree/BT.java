@@ -3,6 +3,8 @@ package BinaryTree;
 import javax.sound.midi.Soundbank;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Scanner;
+
 
 public class BT {
     static class Node{
@@ -14,15 +16,19 @@ public class BT {
             left=right=null;
         }
     }
+
+    static Scanner scan = null;
     public static void main(String[] args) {
-        Node root = new Node(1);
-        root.left = new Node(2);
-        root.right = new Node(3);
-        root.left.left = new Node(4);
-        root.left.right = new Node(200);
-        root.right.left = new Node(6);
-        root.right.left.left = new Node(7);
-        root.right.left.right = new Node(8);
+//        Node root = new Node(1);
+//        root.left = new Node(2);
+//        root.right = new Node(3);
+//        root.left.left = new Node(4);
+//        root.left.right = new Node(200);
+//        root.right.left = new Node(6);
+//        root.right.left.left = new Node(7);
+//        root.right.left.right = new Node(8);
+//        Scanner scan = new Scanner(System.in);
+        Node root=createTree();
 
 
 //        root.right.right = new Node(7);
@@ -41,9 +47,26 @@ public class BT {
         System.out.println(size(root));
         System.out.println(sizeItratively(root));
         System.out.println(MaxInBT(root));
+        leftView(root);
 
     }
 
+    static Node createTree() {
+        scan = new Scanner(System.in);
+        Node root = null;
+        System.out.println("Enter the data: ");
+        int data = scan.nextInt();
+        if (data == -1)
+            return null;
+        root = new Node(data);
+
+        System.out.println("Enter to the left of " + data);
+        root.left = createTree();
+
+        System.out.println("Enter to the right of " + data);
+        root.right = createTree();
+        return root;
+    }
 
     public static void postOrder(Node root){
         if(root!=null){
@@ -104,6 +127,7 @@ public class BT {
 
     }
 
+
     public static void levelOrderTraversal(Node root){
         if(root == null) return;
 
@@ -142,6 +166,22 @@ public class BT {
     public static int MaxInBT(Node root){
         if(root==null) return -999999;
         else return Math.max(root.val,Math.max(MaxInBT(root.left),MaxInBT(root.right)));
+    }
+
+    static int MaxLevel = 0;
+    public static void leftView(Node root){
+
+        leftView(root,1);
+    }
+    private static void leftView(Node root,int currLvl){
+        if(root == null) return;
+        if(MaxLevel < currLvl){
+            System.out.print(root.val+" ");
+            MaxLevel= currLvl;
+        }
+        leftView(root.left,currLvl+1);
+        leftView(root.right,currLvl+1);
+
     }
 
 

@@ -48,6 +48,8 @@ public class BT {
         System.out.println(sizeItratively(root));
         System.out.println(MaxInBT(root));
         leftView(root);
+        System.out.println();
+        leftViewItrativly(root);
 
     }
 
@@ -182,6 +184,24 @@ public class BT {
         leftView(root.left,currLvl+1);
         leftView(root.right,currLvl+1);
 
+    }
+
+    public static void leftViewItrativly(Node root){
+        if(root == null) return;
+        Queue<Node>q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()){
+            int n = q.toArray().length;
+            for (int i = 0;i<n;i++){
+                Node temp = q.poll();
+                if(i==0){
+                    System.out.print(temp.val + " ");
+                }
+                if(temp.left!=null) q.add(temp.left);
+                if(temp.right != null) q.add(temp.right);
+
+            }
+        }
     }
 
 

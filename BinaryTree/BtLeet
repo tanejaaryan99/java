@@ -1,0 +1,41 @@
+
+//144. Binary Tree Preorder Traversal
+class Solution {
+    List<Integer> res=new ArrayList<>();
+    public List<Integer> preorderTraversal(TreeNode root) {
+        preOrder(root);
+        return res;
+    }
+
+    public TreeNode preOrder(TreeNode root){
+
+        if(root == null) return null;
+
+        res.add(root.val);
+        preOrder(root.left);
+        preOrder(root.right);
+        return root;
+    }
+}
+
+
+//====================================
+//145. Binary Tree Postorder Traversal
+class Solution {
+    List<Integer> res = new ArrayList<>();
+    public List<Integer> postorderTraversal(TreeNode root) {
+        postOrder(root);
+        return res;
+    }
+
+    public TreeNode postOrder(TreeNode root){
+
+        if(root == null) return null;
+
+
+        postOrder(root.left);
+        postOrder(root.right);
+        res.add(root.val);
+        return root;
+    }
+}

@@ -39,3 +39,25 @@ class Solution {
         return root;
     }
 }
+
+
+//===============================
+//InOrder
+class Solution {
+    List<Integer>ans = new ArrayList<>();
+    public List<Integer> inorderTraversal(TreeNode root) {
+        inOrder(root);
+        return ans;
+    }
+    public TreeNode inOrder(TreeNode root){
+        if(root == null) return null;
+
+        inOrder(root.left);
+        ans.add(root.val);
+        inOrder(root.right);
+
+        return root;
+    }
+}
+
+//=============================

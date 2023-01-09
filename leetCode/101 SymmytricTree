@@ -1,0 +1,12 @@
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        return sol(root.right,root.left);
+    }
+    public boolean sol(TreeNode right,TreeNode left){
+        if(right == null && left == null) return true;
+        if(right == null || left == null) return false;
+        if(left.val != right.val) return false;
+        return sol(right.right,left.left) && sol(right.left,left.right);
+
+    }
+}

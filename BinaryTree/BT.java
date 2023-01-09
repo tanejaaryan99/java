@@ -55,6 +55,8 @@ public class BT {
         spiralLevelOrderusing1Stack(root);
         System.out.println();
         spiralLevelOrderusing2Stack(root);
+        System.out.println();
+        System.out.println(diameter(root));
 
     }
 
@@ -249,9 +251,12 @@ public class BT {
             }
 
         }
-
-
     }
 
+    public static int diameter(Node root){
+        if (root == null) return 0;
 
+        int cRD = height(root.left) + height(root.right)+1;
+        return Math.max(cRD , Math.max(diameter(root.left),diameter(root.right)));
+    }
 }

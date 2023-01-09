@@ -1,0 +1,17 @@
+class Solution {
+    public TreeNode pruneTree(TreeNode root) {
+        return contains1(root);
+    }
+    public TreeNode contains1(TreeNode root){
+        if(root ==  null) return null;
+        root.left = contains1(root.left);
+        root.right = contains1(root.right);
+        if(root.left == null && root.right == null){
+            if(root.val != 1) root = null;
+            return root;
+        }
+
+        return root;
+
+    }
+}

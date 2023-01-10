@@ -56,6 +56,8 @@ public class BT {
         System.out.println();
         spiralLevelOrderusing2Stack(root);
         System.out.println();
+        spiralOrderBySir(root);
+        System.out.println();
         System.out.println(diameter(root));
 
     }
@@ -250,6 +252,35 @@ public class BT {
                 if(temp.left != null) s1.add(temp.left);
             }
 
+        }
+    }
+    public static void spiralOrderBySir(Node root){
+        if(root == null) return;
+        LinkedList<Node>ll=new LinkedList();
+        ll.addLast(root);
+        int cnt=0;
+        LinkedList<Node>hlp=new LinkedList();
+        while(!ll.isEmpty())
+        {
+            Node temp=ll.removeFirst();
+            System.out.print(temp.val + " ");
+            if(temp.left!=null && temp.right!= null){
+                if(cnt%2==0)
+                {
+                    hlp.addLast(temp.right);
+                    hlp.addLast(temp.left);
+                }
+                else{
+                    hlp.addFirst(temp.right);
+                    hlp.addFirst(temp.left);
+                }
+            }
+            if(ll.isEmpty())
+            {
+                cnt+=1;
+                ll=hlp;
+                hlp=new LinkedList();
+            }
         }
     }
 

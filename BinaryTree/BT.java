@@ -1,10 +1,7 @@
 package BinaryTree;
 
 import javax.sound.midi.Soundbank;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
-import java.util.Stack;
+import java.util.*;
 
 
 public class BT {
@@ -59,6 +56,13 @@ public class BT {
         spiralOrderBySir(root);
         System.out.println();
         System.out.println(diameter(root));
+        System.out.println(diameterViaGlobalVar(root));
+        System.out.println(MaxDia);
+        ArrayList<Node>p = new ArrayList<>();
+        System.out.println(path(root,100,p));
+        print(p);
+
+
 
     }
 
@@ -110,10 +114,8 @@ public class BT {
     }
     public static int heightByPI(Node root)//height starts from 0
     {
-        if(root==null)
-            return 0;
-        else
-            return Math.max(heightByPI(root.left), heightByPI(root.right)+1);
+        if(root==null) return 0;
+        else return Math.max(heightByPI(root.left), heightByPI(root.right)+1);
     }
     public static void nodeAtDisK(Node root , int k){
         //by PI
@@ -140,7 +142,7 @@ public class BT {
 
 
     public static void levelOrderTraversal(Node root){
-        if(root == null) return;
+        if(root == null) System.out.print("null ");
 
         Queue<Node> q = new LinkedList<>();
         q.add(root);
@@ -177,6 +179,11 @@ public class BT {
     public static int MaxInBT(Node root){
         if(root==null) return -999999;
         else return Math.max(root.val,Math.max(MaxInBT(root.left),MaxInBT(root.right)));
+    }
+
+    public static int sum(Node root){
+        if(root == null) return 0;
+        return root.val + sum(root.left) + sum(root.right);
     }
 
     static int MaxLevel = 0;
@@ -290,4 +297,55 @@ public class BT {
         int cRD = height(root.left) + height(root.right)+1;
         return Math.max(cRD , Math.max(diameter(root.left),diameter(root.right)));
     }
+
+    static int MaxDia = 0;
+    public static int diameterViaGlobalVar(Node root){
+        if(root == null) return 0;
+        int lh = diameterViaGlobalVar(root.left);
+        int rh = diameterViaGlobalVar(root.right);
+        MaxDia = Math.max(MaxDia, lh+rh+1);
+
+        return 1+Math.max(lh,rh);
+    }
+
+
+    public static boolean path(Node root , int val , ArrayList<Node> pathList){
+        if(root == null) return false;
+
+        pathList.add(root);
+        if(root.val == val) return true;
+        if(path(root.left , val,pathList) || path(root.right , val , pathList)) return true;
+        pathList.remove(pathList.size()-1);
+        return false;
+    }
+
+    public static Node lCA(Node root , int n1,int n2){
+        ArrayList<Node> path1 = new ArrayList<>();
+        ArrayList<Node> path2 = new ArrayList<>();
+        if(path(root,n1,path1) == false || path(root,n2,path2) == false) return null;
+
+        print(path1);
+        print(path2);
+
+        Node lca = root;
+
+        for (int i = 0; i < path1.size() && i<path2.size(); i++) {
+            if(path1.get(i).val != path2.get(i).val) lca = path1.get(i);
+        }
+        return lca;
+    }
+
+    static void print(ArrayList<Node> arrlist){
+        ListIterator<Node> litr = null;
+
+        litr=arrlist.listIterator();
+
+        while(litr.hasNext()){
+            System.out.print(litr.next().val+ " ");
+        }
+        System.out.println();
+    }
+
+
+
 }

@@ -167,7 +167,6 @@ public class linkedList {
                 }
                 temp = next;
                 cnt--;
-
             }
         }
 

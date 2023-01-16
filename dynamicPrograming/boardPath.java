@@ -3,7 +3,8 @@ package dynamicPrograming;
 public class boardPath {
     public static void main(String[] args) {
         System.out.println(sol(0,10,6));
-        System.out.println(solTopDown(0,6,10,new int[6]));
+        System.out.println(solTopDown(0,1000,6,new int[1000]));
+        System.out.println(solBottomUp(0,1000,6));
     }
 
     public static int sol(int src , int dest, int dice){
@@ -26,5 +27,21 @@ public class boardPath {
         }
         arr[src] = cnt;
         return cnt;
+    }
+
+    public static int solBottomUp(int src , int dest , int dice){
+        int arr[] = new int[dest+dice+1];
+        arr[dest] = 1;
+        int sum = 1;
+        for(int i = dest-1 ; i>=0;i--){
+            int cnt = 0;
+            for (int j = 1; j<=dice ; j++) {
+                cnt += arr[i+j];
+            }
+            arr[i]=cnt;
+//            arr[i] = sum;
+//            sum+=arr[i];
+        }
+        return arr[0];
     }
 }

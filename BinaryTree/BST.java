@@ -45,6 +45,16 @@ public class BST {
         System.out.println(search(root,80));
         System.out.println(searchItratively(root,100));
 
+        deleteNode(root , 80);
+        preOrder(root);
+        System.out.println();
+        deleteNode(root2 , 90);
+        preOrder(root2);
+        System.out.println();
+        deleteNode(root2,70);
+        preOrder(root2);
+        System.out.println();
+
     }
 
     public static Node insert(Node root ,int val){
@@ -113,6 +123,28 @@ public class BST {
         root = root.right;
         while(root != null && root.left != null){
             root = root.left;
+        }
+        return root;
+    }
+
+    public static Node deleteNode(Node root, int val){
+        if(root == null) return null;
+        if(root.val > val) root.left = deleteNode(root.left , val);
+        else if (root.val < val) root.right = deleteNode(root.right , val);
+        else{
+            if(root.left == null) {
+                Node temp= root.right;
+                return temp;
+            }
+            else if(root.right == null){
+                Node temp =root.left;
+                return temp;
+            }
+            else{
+                Node successor = inOrderSucessor(root);
+                root.val = successor.val;
+                root.right = deleteNode(root.right,successor.val);
+            }
         }
         return root;
     }

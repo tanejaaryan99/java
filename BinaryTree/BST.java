@@ -1,6 +1,8 @@
 package BinaryTree;
 
 import java.sql.SQLOutput;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BST {
     static class Node{
@@ -59,38 +61,64 @@ public class BST {
 
 
 
-        //Floor in BST
-        //========lvl1========
-        Node root = new Node(15);
-        //========Level 2=========
-        root = insert(root,5);
-        root = insert(root,20);
-        //========Level 3 =========
-        root = insert(root,9);
-        root = insert(root,17);
-        root = insert(root,25);
+//        //Floor in BST
+//        //========lvl1========
+//        Node root = new Node(15);
+//        //========Level 2=========
+//        root = insert(root,5);
+//        root = insert(root,20);
+//        //========Level 3 =========
+//        root = insert(root,9);
+//        root = insert(root,17);
+//        root = insert(root,25);
+//
+//        preOrder(root);
+//        System.out.println();
+//
+//        System.out.println(floor(root,20));
+//
+//        //========lvl1========
+//        Node root2 = new Node(5);
+//        //========Level 2=========
+//        root2 = insert(root2,3);
+//        root2 = insert(root2,20);
+//        //========Level 3 =========
+//        root2 = insert(root2,2);
+//        root2 = insert(root2,4);
+//        root2 = insert(root2,13);
+//        root2 = insert(root2,25);
+//
+//        preOrder(root2);
+//        System.out.println();
+//
+//        System.out.println(floor(root2,15));
+//        System.out.println(ceil(root2,15));
 
-        preOrder(root);
-        System.out.println();
 
-        System.out.println(floor(root,20));
+        //===========Kth Smallest==========
+        //====== Level 1 ==============
+        Node root = new Node(60);
 
-        //========lvl1========
-        Node root2 = new Node(5);
-        //========Level 2=========
-        root2 = insert(root2,3);
-        root2 = insert(root2,20);
-        //========Level 3 =========
-        root2 = insert(root2,2);
-        root2 = insert(root2,4);
-        root2 = insert(root2,13);
-        root2 = insert(root2,25);
+        //=======lvl 2=======
+        root = insert(root , 50);
+        root = insert(root , 80);
+        //==========Lvl 3===========
+        root = insert(root , 30);
+        root = insert(root , 55);
+        root = insert(root , 70);
+        root = insert(root , 90);
 
-        preOrder(root2);
-        System.out.println();
+        //=======LVL 4==============
+        root = insert(root , 75);
 
-        System.out.println(floor(root2,15));
-        System.out.println(ceil(root2,15));
+        List<Integer> li = inOrderUsingList(root);
+        System.out.println(li);
+
+        System.out.println(kSmallest(root , 3));
+        System.out.println(kLargest(root , 3));
+
+        kSmallestByPI(root,3);
+
 
     }
 
@@ -154,6 +182,22 @@ public class BST {
         System.out.print(root.val + " ");
         inOrder(root.left);
         inOrder(root.right);
+    }
+
+//    static ArrayList<Integer> inOrderUsingList(Node root){
+//        return inOrderUsingList(root , new ArrayList<>());
+//    }
+    private static List<Integer> inOrderUsingList(Node root){
+        List<Integer> result = new ArrayList<>();
+        inorderTraversal(root, result);
+        return result;
+    }
+
+    private static void inorderTraversal(Node node, List<Integer> result) {
+        if (node == null) return;
+        inorderTraversal(node.left, result);
+        result.add(node.val);
+        inorderTraversal(node.right, result);
     }
 
     public static Node inOrderSucessor(Node root){
@@ -255,5 +299,26 @@ public class BST {
         else{
             return root.val;
         }
+    }
+
+    static int kSmallest(Node root , int k){
+        List<Integer>list = inOrderUsingList(root);
+        return list.get(k-1);
+    }
+    static void kSmallestByPI(Node root , int k){
+//        int ans = 0;
+        if(root == null) return;
+        kSmallestByPI(root.left ,k);
+        k--;
+        if(k==0) System.out.println(root.val);
+        else kSmallestByPI(root,k);
+//        return ans;
+    }
+
+
+    static int kLargest(Node root , int k){
+        List<Integer>list = inOrderUsingList(root);
+        k = list.size()-k;
+        return list.get(k);
     }
 }

@@ -5,8 +5,9 @@ public class BinaryTreeClient {
 
         BinaryTree bt = new BinaryTree();
 //        bt.construct(10,true);
-//        bt.display();
-        bt.height();
+        bt.display();
+//        bt.height();
+//        bt.construct(10,true);
 
     }
 }

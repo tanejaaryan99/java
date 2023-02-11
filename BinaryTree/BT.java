@@ -40,27 +40,30 @@ public class BT {
 //        System.out.println(depth(root));
 //        System.out.println(heightByPI(root));
 //        nodeAtDisK(root,2);
-        levelOrderTraversal(root);
-        System.out.println();
-        System.out.println(size(root));
-        System.out.println(sizeItratively(root));
-        System.out.println(MaxInBT(root));
-        leftView(root);
-        System.out.println();
-        leftViewItrativly(root);
-        System.out.println();
-        spiralLevelOrderusing1Stack(root);
-        System.out.println();
-        spiralLevelOrderusing2Stack(root);
-        System.out.println();
-        spiralOrderBySir(root);
-        System.out.println();
-        System.out.println(diameter(root));
-        System.out.println(diameterViaGlobalVar(root));
-        System.out.println(MaxDia);
-        ArrayList<Node>p = new ArrayList<>();
-        System.out.println(path(root,100,p));
-        print(p);
+//        levelOrderTraversal(root);
+//        System.out.println();
+//        System.out.println(size(root));
+//        System.out.println(sizeItratively(root));
+//        System.out.println(MaxInBT(root));
+//        leftView(root);
+//        System.out.println();
+//        leftViewItrativly(root);
+//        System.out.println();
+//        spiralLevelOrderusing1Stack(root);
+//        System.out.println();
+//        spiralLevelOrderusing2Stack(root);
+//        System.out.println();
+//        spiralOrderBySir(root);
+//        System.out.println();
+//        System.out.println(diameter(root));
+//        System.out.println(diameterViaGlobalVar(root));
+//        System.out.println(MaxDia);
+//        ArrayList<Node>p = new ArrayList<>();
+//        System.out.println(path(root,100,p));
+//        print(p);
+
+        inOrder(root);
+        System.out.println(kSmallest(root , 3));
 
 
 
@@ -104,6 +107,21 @@ public class BT {
             System.out.print(root.val + " ");
             inOrder(root.right);
         }
+    }
+
+//    static List<Integer> inOrder = new ArrayList<>();
+
+    static ArrayList<Integer> inOrderUsingList(Node root){
+        return inOrderUsingList(root , new ArrayList<>());
+    }
+    private static ArrayList<Integer> inOrderUsingList(Node root , ArrayList<Integer>inOrder){
+        if(root == null) return new ArrayList<>();
+
+        inOrder = inOrderUsingList(root.left , inOrder);
+        inOrder.add(root.val);
+        inOrder = inOrderUsingList(root.right , inOrder);
+
+        return inOrder;
     }
 
     public static int height(Node root){ //height starts from 1
@@ -344,6 +362,12 @@ public class BT {
             System.out.print(litr.next().val+ " ");
         }
         System.out.println();
+    }
+
+    static int kSmallest(Node root , int k){
+        ArrayList<Integer>list = inOrderUsingList(root);
+        return list.get(k-1);
+
     }
 
 

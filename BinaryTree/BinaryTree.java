@@ -52,7 +52,10 @@ public class BinaryTree {
         return nn;
     }
 
-    public void display(Node root) {
+    public void display(){
+        display(root);
+    }
+    private void display(Node root) {
         if (root == null) {
             return;
         }

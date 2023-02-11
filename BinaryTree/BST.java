@@ -117,7 +117,7 @@ public class BST {
         System.out.println(kSmallest(root , 3));
         System.out.println(kLargest(root , 3));
 
-        kSmallestByPI(root,3);
+//        kSmallestByPI(root,3);
 
 
     }

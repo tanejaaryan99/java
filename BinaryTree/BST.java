@@ -119,7 +119,6 @@ public class BST {
 
 //        kSmallestByPI(root,3);
 
-
     }
 
     public static Node insert(Node root ,int val){

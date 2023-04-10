@@ -6,22 +6,22 @@ public class fibonacci {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
-        System.out.println(byRecursion(n));
-        System.out.println(byTopDown(0,n , new int[n]));
-        System.out.println(byBottomUp(n));
+//        System.out.println(byRecursion(n));
+        System.out.println(byTopDown(0,n , new long[n]));
+//        System.out.println(byBottomUp(n));
     }
 
-    public static int byRecursion(int n) {
+    public static long byRecursion(int n) {
         if(n == 0) return 0;
         if(n == 1) return 1;
-        return byRecursion(n - 1) + byRecursion(n - 2);
+        return (long)byRecursion(n - 1) + (long)byRecursion(n - 2);
     }
 
-    public static int byTopDown(int str ,int n , int arr[]) {
+    public static long byTopDown(int str ,int n , long arr[]) {
         if(n == 0) return 0;
         if(n == 1) return 1;
         if(arr[str] != 0) return arr[str];
-        int k = byTopDown(str+1 ,n - 1 , arr) + byTopDown(str+2 ,n - 2 ,arr);
+        long k = byTopDown(str+1 ,n - 1 , arr) + byTopDown(str+2 ,n - 2 ,arr);
         arr[str] =  k;
         return k;
     }
